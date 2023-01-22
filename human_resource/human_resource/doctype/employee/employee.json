@@ -13,11 +13,14 @@
   "full_name",
   "image",
   "status",
+  "column_break_7",
   "employee_number",
   "date_of_birth",
+  "age",
   "date_of_joining",
   "mobile",
   "department",
+  "section_break_14",
   "employee_part"
  ],
  "fields": [
@@ -39,6 +42,7 @@
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Full Name"
   },
   {
@@ -64,7 +68,7 @@
   },
   {
    "fieldname": "date_of_joining",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Date Of Joining"
   },
   {
@@ -83,11 +87,25 @@
    "fieldtype": "Table",
    "label": "Employee Part  ",
    "options": "Employee Part"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Age"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-14 16:52:31.147120",
+ "modified": "2023-01-21 15:28:36.226861",
  "modified_by": "Administrator",
  "module": "Human Resource",
  "name": "Employee",
