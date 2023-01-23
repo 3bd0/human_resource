@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-01-21 15:39:33.999844",
+ "creation": "2023-01-22 22:10:33.350127",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -12,7 +12,8 @@
   "leave_type",
   "from_date",
   "to_date",
-  "total_leaves_allocated"
+  "total_leaves_allocated",
+  "amended_from"
  ],
  "fields": [
   {
@@ -25,13 +26,13 @@
    "fetch_from": "employee.full_name",
    "fetch_if_empty": 1,
    "fieldname": "employee_name",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Employee Name",
-   "options": "Employee",
    "read_only": 1
   },
   {
    "fetch_from": "employee.department",
+   "fetch_if_empty": 1,
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Department",
@@ -47,24 +48,32 @@
   {
    "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "From Date",
-   "options": "Leave Application"
+   "label": "From Date"
   },
   {
    "fieldname": "to_date",
    "fieldtype": "Date",
-   "label": "To Date",
-   "options": "Leave Application"
+   "label": "To Date"
   },
   {
    "fieldname": "total_leaves_allocated",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "label": "Total Leaves Allocated"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Leave Allocation",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2023-01-21 23:37:42.639170",
+ "modified": "2023-01-22 22:10:33.350127",
  "modified_by": "Administrator",
  "module": "Human Resource",
  "name": "Leave Allocation",
