@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe.utils import date_diff
+from frappe.utils import date_diff, today
 
 
 class LeaveApplication(Document):
@@ -11,6 +11,9 @@ class LeaveApplication(Document):
         self.get_leave_days()
         self.get_leave_balance()
         self.selected_days_balance_availability()
+        self.date_order()
+        self.check_continuous_days_allowed()
+        self.application_request_preparing()
 
     def on_submit(self):
         self.submit_update_allocation()
@@ -29,13 +32,14 @@ class LeaveApplication(Document):
         self.leave_balance_before_application = result
 
     def selected_days_balance_availability(self):
-        query_from_date = frappe.db.get_value("Leave Allocation",
-                    {"employee_name": self.employee_name, "leave_type": self.leave_type}, "from_date")
-        query_to_date = frappe.db.get_value("Leave Allocation",
-                    {"employee_name": self.employee_name, "leave_type": self.leave_type}, "to_date")
-        if self.from_date >= str(query_from_date) and self.to_date <= str(query_to_date):
-            if self.total_leave_days > self.leave_balance_before_application:
-                frappe.throw("Error, Please Select Duration Not More Allowed")
+        query = frappe.db.get_value("Leave Allocation",
+                    {"employee_name": self.employee_name, "leave_type": self.leave_type},
+                                              ["from_date", "to_date"], as_dict=1)
+        val = frappe.db.get_value("Leave Type", self.leave_type, "allow_negative_balance")
+        if self.from_date >= str(query.from_date) and self.to_date <= str(query.to_date):
+            if val == 0:
+                if self.total_leave_days > self.leave_balance_before_application:
+                    frappe.throw("Error, Please Select Duration Not More Allowed")
         else:
             frappe.throw("Error, Please Select Duration Within Allowed")
 
@@ -49,4 +53,20 @@ class LeaveApplication(Document):
                                      "total_leaves_allocated")
         new_balance = result + self.total_leave_days
         return frappe.db.set_value("Leave Allocation", self.employee_name, "total_leaves_allocated", new_balance)
+
+    def date_order(self):
+        if self.from_date > self.to_date:
+            frappe.throw("Error, From Date Must Be Before To Date")
+
+    def check_continuous_days_allowed(self):
+        query = frappe.db.get_value("Leave Type", self.leave_type, "max_continuous_days_allowed")
+        if self.total_leave_days > query:
+            frappe.throw("Error, Total Leave Days > Max Continuous Allowed")
+
+    def application_request_preparing(self):
+        query = frappe.db.get_value("Leave Type", self.leave_type, "applicable_after")
+        period = date_diff(self.from_date, today())
+        if period < query:
+            frappe.throw(f"Error, Application Must Be Before {query} Days From Leave Date At Least")
+
 
