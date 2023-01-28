@@ -85,8 +85,8 @@
   {
    "fieldname": "employee_part",
    "fieldtype": "Table",
-   "label": "Employee Part  ",
-   "options": "Employee Part"
+   "label": "Employee Education  ",
+   "options": "Employee Education"
   },
   {
    "fieldname": "age",
@@ -105,7 +105,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-21 15:28:36.226861",
+ "modified": "2023-01-28 21:23:29.727433",
  "modified_by": "Administrator",
  "module": "Human Resource",
  "name": "Employee",

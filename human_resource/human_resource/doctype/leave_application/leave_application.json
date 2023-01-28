@@ -28,14 +28,6 @@
    "options": "Employee"
   },
   {
-   "fetch_from": "employee.full_name",
-   "fetch_if_empty": 1,
-   "fieldname": "employee_name",
-   "fieldtype": "Data",
-   "label": "Employee Name",
-   "read_only": 1
-  },
-  {
    "fieldname": "leave_type",
    "fieldtype": "Link",
    "label": "Leave Type",
@@ -45,10 +37,8 @@
    "fetch_from": "employee.department",
    "fetch_if_empty": 1,
    "fieldname": "department",
-   "fieldtype": "Link",
-   "label": "Department",
-   "options": "Department",
-   "read_only": 1
+   "fieldtype": "Read Only",
+   "label": "Department"
   },
   {
    "fieldname": "status",
@@ -89,11 +79,9 @@
   },
   {
    "fetch_from": "alternative_employee.full_name",
-   "fetch_if_empty": 1,
    "fieldname": "alternative_employee_name",
-   "fieldtype": "Data",
-   "label": "Alternative Employee Name",
-   "read_only": 1
+   "fieldtype": "Read Only",
+   "label": "Alternative Employee Name"
   },
   {
    "fieldname": "amended_from",
@@ -103,12 +91,18 @@
    "options": "Leave Application",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fetch_from": "employee.full_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-21 23:23:34.115835",
+ "modified": "2023-01-28 21:15:33.118954",
  "modified_by": "Administrator",
  "module": "Human Resource",
  "name": "Leave Application",

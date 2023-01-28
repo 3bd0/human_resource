@@ -14,6 +14,7 @@ class LeaveApplication(Document):
         self.date_order()
         self.check_continuous_days_allowed()
         self.application_request_preparing()
+        self.check_alt_employee()
 
     def on_submit(self):
         self.submit_update_allocation()
@@ -36,12 +37,15 @@ class LeaveApplication(Document):
                     {"employee_name": self.employee_name, "leave_type": self.leave_type},
                                               ["from_date", "to_date"], as_dict=1)
         val = frappe.db.get_value("Leave Type", self.leave_type, "allow_negative_balance")
-        if self.from_date >= str(query.from_date) and self.to_date <= str(query.to_date):
-            if val == 0:
-                if self.total_leave_days > self.leave_balance_before_application:
-                    frappe.throw("Error, Please Select Duration Not More Allowed")
+        if query:
+            if date_diff(self.from_date, query.from_date) >= 0 >= date_diff(self.to_date, query.to_date):
+                if val == 0:
+                    if self.total_leave_days > self.leave_balance_before_application:
+                        frappe.throw("Error, Please Select Duration Not More Allowed")
+            else:
+                frappe.throw("Error, Please Select Duration Within Allowed")
         else:
-            frappe.throw("Error, Please Select Duration Within Allowed")
+            frappe.throw("Leave Type Is Unavailable")
 
     def submit_update_allocation(self):
         new_balance = self.leave_balance_before_application - self.total_leave_days
@@ -60,13 +64,15 @@ class LeaveApplication(Document):
 
     def check_continuous_days_allowed(self):
         query = frappe.db.get_value("Leave Type", self.leave_type, "max_continuous_days_allowed")
-        if self.total_leave_days > query:
+        if self.total_leave_days > float(query):
             frappe.throw("Error, Total Leave Days > Max Continuous Allowed")
 
     def application_request_preparing(self):
         query = frappe.db.get_value("Leave Type", self.leave_type, "applicable_after")
         period = date_diff(self.from_date, today())
-        if period < query:
+        if period < float(query):
             frappe.throw(f"Error, Application Must Be Before {query} Days From Leave Date At Least")
 
-
+    def check_alt_employee(self):
+        if self.employee == self.alternative_employee:
+            frappe.throw("Alternative Employee Can't Be Yourself")
