@@ -31,12 +31,8 @@ frappe.ui.form.on('Employee', {
         frm.set_value("age", getAge(frm.doc.date_of_birth));
 	},
 	validate: function(frm) {
-	   // validate status
-	    if (frm.doc.status != "Active"){
-	        msgprint('Sorry, Your Status Must Active');
-            throw('Sorry, You Can Not Make Status Active');
-	    }
-	   // validate age
+
+	   // validate age & status
 	    function getAge(birthdate) {
             var today = new Date();
             var birthdate = new Date(birthdate);
@@ -48,7 +44,7 @@ frappe.ui.form.on('Employee', {
             return age;
 		}
 
-	    if (getAge(frm.doc.date_of_birth) >= 60){
+	    if (getAge(frm.doc.date_of_birth) >= 60 && frm.doc.status == "Active"){
             msgprint('Sorry, Your Age Is Too Old');
             throw('Sorry, Your Age Is Too Old');
         }
@@ -66,6 +62,5 @@ frappe.ui.form.on('Employee', {
             msgprint('Sorry, Employee Part Must Be At Least 2 Branches');
             throw('Sorry, Employee Part Must Be At Least 2 Branches');
         }
-        }
-	}
-);
+    }
+});
