@@ -32,8 +32,8 @@ frappe.ui.form.on('Employee', {
 	},
 	validate: function(frm) {
 	   // validate status
-	    if (frm.doc.status == "Active"){
-	        msgprint('Sorry, You Can Not Make Status Active');
+	    if (frm.doc.status != "Active"){
+	        msgprint('Sorry, Your Status Must Active');
             throw('Sorry, You Can Not Make Status Active');
 	    }
 	   // validate age
