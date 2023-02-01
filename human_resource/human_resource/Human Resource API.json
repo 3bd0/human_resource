@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "f00285b1-d9fc-4b83-b658-a9a0984e872d",
+		"name": "Human Resource",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Show All Employees Attendance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token 433c2b2cc03da53:a64185bed26dbfc",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/resource/Attendance",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"resource",
+						"Attendance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Specified Employee Attendance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token 433c2b2cc03da53:a64185bed26dbfc",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/resource/Attendance/c9bcc77506",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"resource",
+						"Attendance",
+						"c9bcc77506"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Employee Attendance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token 433c2b2cc03da53:a64185bed26dbfc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"employee\": \"Emp005\", \"attendance_date\": \"2023-02-02\", \"check_in\": \"06:00:00\", \"check_out\": \"13:45:00\"}\n\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/resource/Attendance",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"resource",
+						"Attendance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Employee Attendance Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token 433c2b2cc03da53:a64185bed26dbfc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"employee\": \"Emp005\", \"attendance_date\": \"2023-02-02\", \"check_in\": \"06:00:00\", \"check_out\": \"13:45:00\"}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/resource/Attendance/c9bcc77506",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"resource",
+						"Attendance",
+						"c9bcc77506"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Employee Attendance Copy 2",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token 433c2b2cc03da53:a64185bed26dbfc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/resource/Attendance/c9bcc77506",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"resource",
+						"Attendance",
+						"c9bcc77506"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attendence Creation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token 20be038299b37fe:c915b79173bf79e",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"attendance_date\": \"2023-04-04\", \"check_in\": \"08:00:00\", \"check_out\": \"10:00:00\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/method/human_resource.human_resource.doctype.attendance.attendance.create_attendance",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"method",
+						"human_resource.human_resource.doctype.attendance.attendance.create_attendance"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
